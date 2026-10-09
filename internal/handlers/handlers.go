@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"bot/commands"
-	"bot/repository"
+	"bot/internal/commands"
+	"bot/internal/repository"
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"

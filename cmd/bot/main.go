@@ -1,9 +1,10 @@
 package main
 
 import (
-	"bot/database"
-	"bot/handlers"
-	"bot/repository"
+	config "bot/configs"
+	"bot/internal/database"
+	"bot/internal/handlers"
+	"bot/internal/repository"
 	"context"
 	"fmt"
 	"log"
@@ -13,24 +14,12 @@ import (
 	"time"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println(err)
-	}
+	botConfig := config.LoadConfig()
 
-	dbConfig := database.PGConfig{
-		User:     os.Getenv("DB_USER"),
-		Password: os.Getenv("DB_PASSWORD"),
-		Host:     os.Getenv("DB_HOST"),
-		Port:     os.Getenv("DB_PORT"),
-		DBName:   os.Getenv("DB_NAME"),
-	}
-
-	db, err := database.InitDB(dbConfig)
+	db, err := database.InitDB(botConfig.DBConfig)
 	if err != nil {
 		log.Fatalln(err)
 	}

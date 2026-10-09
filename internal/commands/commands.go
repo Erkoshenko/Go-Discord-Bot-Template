@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"bot/repository"
+	"bot/internal/repository"
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"
