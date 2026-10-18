@@ -1,23 +1,22 @@
-package commands
+package general
 
 import (
-	"bot/internal/repository"
 	"bot/pkg/respond"
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-type PingCommand struct{}
+type pingCommand struct{}
 
-func (c *PingCommand) Definition() *discordgo.ApplicationCommand {
+func (c *pingCommand) Definition() *discordgo.ApplicationCommand {
 	return &discordgo.ApplicationCommand{
 		Name:        "ping",
 		Description: "Проверить работу бота",
 	}
 }
 
-func (c *PingCommand) Execute(s *discordgo.Session, i *discordgo.InteractionCreate, repos *repository.Repositories) error {
+func (c *pingCommand) Execute(s *discordgo.Session, i *discordgo.InteractionCreate) error {
 	if err := respond.InteractionRespond(s, i, "Понг!", true); err != nil {
 		return fmt.Errorf("не удалось отправить ответ на пинг: %w", err)
 	}
